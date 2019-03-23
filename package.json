@@ -1,0 +1,33 @@
+{
+  "name": "list-it",
+  "version": "0.0.1",
+  "description": "Everything is a list",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_PATH=. next",
+    "build": "NODE_PATH=. next build",
+    "start": "NODE_PATH=. next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peeke/list-it.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peeke/list-it/issues"
+  },
+  "homepage": "https://github.com/peeke/list-it#readme",
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "express": "^4.16.4",
+    "next": "^8.0.3",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
+  },
+  "devDependencies": {
+    "proptypes": "^1.1.0"
+  }
+}

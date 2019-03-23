@@ -1,0 +1,20 @@
+.list {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+
+    > * {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  li:first-child {
+    border-top: 1px solid #ccc;
+  }
+}

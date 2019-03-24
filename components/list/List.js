@@ -4,8 +4,6 @@ import Button from 'components/button/Button'
 
 import css from './list.scss'
 
-let id = 0
-
 class List extends PureComponent {
   static defaultProps = {
     onAddItem: () => {}
@@ -20,8 +18,8 @@ class List extends PureComponent {
   }
 
   onAddItem = () => {
-    id += 1
-    this.props.onAddItem({ id, value: this.state.newItem })
+    this.props.onAddItem({ value: this.state.newItem })
+    this.setState({ newItem: '' })
   }
 
   render() {
@@ -29,25 +27,13 @@ class List extends PureComponent {
     return (
       <div className={css.list}>
         <h2>{title}</h2>
-        <div>
-          <ul>
-            {Children.map(children, this.renderItem)}
-            <li>
-              <input
-                type="text"
-                onChange={this.onNewItemChange}
-                value={this.state.newItem}
-              />
-              <Button onClick={this.onAddItem}>Add list item</Button>
-            </li>
-          </ul>
-        </div>
+        <ul>
+          {Children.map(children, child => (
+            <li key={child.props.id}>{child}</li>
+          ))}
+        </ul>
       </div>
     )
-  }
-
-  renderItem(child, i) {
-    return <li key={i}>{child}</li>
   }
 }
 

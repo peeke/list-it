@@ -1,9 +1,7 @@
-import uuid from 'uuid/v4'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { createItem } from 'actions/itemActions'
-import { addListItem, addList } from 'actions/listActions'
+import { createListItem, addList } from 'actions/listActions'
 import { getListById } from 'selectors/listSelectors'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
@@ -18,9 +16,7 @@ class Index extends PureComponent {
   }
 
   addItem = (item, listId) => {
-    const id = uuid()
-    this.props.createItem(id, item)
-    this.props.addListItem(listId, id)
+    this.props.createListItem(listId, item)
   }
 
   addList = () => {
@@ -69,8 +65,7 @@ export default connect(
     return { lists, itemIds }
   },
   {
-    createItem,
-    addListItem,
+    createListItem,
     addList
   }
 )(Index)

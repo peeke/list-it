@@ -1,49 +1,43 @@
 import uuid from 'uuid/v4'
 
-import { ADD_LIST_ITEM, ADD_LIST } from 'actions/listActions'
+import { ADD_ENTITY_TO_LIST, CREATE_LIST } from 'actions/listActions'
 
 const defaultState = {
   byId: {
     0: {
       id: 0,
       title: 'Your first list',
-      items: []
+      entities: []
     }
   },
   allIds: [0]
 }
 
-export default function listReducer(state = defaultState, action) {
-  switch (action.type) {
-    case ADD_LIST_ITEM: {
-      const { listId, id } = action
-      const byId = { ...state.byId }
-      const allIds = [...state.allIds]
-
-      byId[listId].items = [...byId[listId].items, id]
-
-      return {
-        ...state,
-        byId,
-        allIds
-      }
-    }
-    case ADD_LIST: {
-      const { title } = action
+export default function listReducer(
+  state = defaultState,
+  { type, payload, error, meta }
+) {
+  switch (type) {
+    case CREATE_LIST: {
       const list = {
+        ...payload,
         id: uuid(),
-        title,
-        items: []
+        entities: []
       }
 
       const byId = { ...state.byId, [list.id]: list }
       const allIds = [...state.allIds, list.id]
-      return {
-        ...state,
-        byId,
-        allIds
-      }
+      return { ...state, byId, allIds }
     }
+
+    case ADD_ENTITY_TO_LIST: {
+      const { listId, entityId } = payload
+      const byId = { ...state.byId }
+      byId[listId].entities = [...byId[listId].entities, entityId]
+
+      return { ...state, byId }
+    }
+
     default:
       return { ...state }
   }

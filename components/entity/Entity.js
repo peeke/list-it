@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 
-import css from './item.scss'
+import css from './entity.scss'
 
-class Item extends PureComponent {
+class Entity extends PureComponent {
   editable = React.createRef()
 
   static defaultProps = {
@@ -25,7 +25,7 @@ class Item extends PureComponent {
   render() {
     const { id } = this.props
     return (
-      <div id={id} key={id} className={css.item} onKeyDown={this.onKeyDown}>
+      <div id={id} key={id} className={css.entity} onKeyDown={this.onKeyDown}>
         <p ref={this.editable} contentEditable={true} />
       </div>
     )
@@ -36,4 +36,4 @@ class Item extends PureComponent {
   }
 }
 
-export default Item
+export default Entity

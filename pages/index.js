@@ -1,26 +1,26 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { createListItem, addList } from 'actions/listActions'
-import { getListById } from 'selectors/listSelectors'
+import { addNewEntityToList, createList } from 'actions/listActions'
+import { getAllListsPopulated } from 'selectors/listSelectors'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
 import List from 'components/list/List'
-import Item from 'components/item/Item'
+import Entity from 'components/entity/Entity'
 import Button from 'components/button/Button'
 
 class Index extends PureComponent {
   state = {
     newListName: '',
-    items: []
+    entities: []
   }
 
-  addItem = (item, listId) => {
-    this.props.createListItem(listId, item)
+  addEntity = (entity, listId) => {
+    this.props.addNewEntityToList(listId, entity)
   }
 
   addList = () => {
-    this.props.addList(this.state.newListName)
+    this.props.createList(this.state.newListName)
     this.setState({ newListName: '' })
   }
 
@@ -38,12 +38,12 @@ class Index extends PureComponent {
           <div key={list.id}>
             <h2>{list.title}</h2>
             <List id={list.id} key={list.id}>
-              {list.items.map(item => (
-                <Item key={item.id} text={item.value} />
+              {list.entities.map(entity => (
+                <Entity key={entity.id} text={entity.value} />
               ))}
-              <Item
+              <Entity
                 key="new"
-                onSave={value => this.addItem({ value }, list.id)}
+                onSave={value => this.addEntity({ value }, list.id)}
               />
             </List>
           </div>
@@ -59,13 +59,11 @@ class Index extends PureComponent {
 }
 
 export default connect(
-  state => {
-    const lists = state.lists.allIds.map(id => getListById(state, id))
-    const itemIds = [...state.items.allIds]
-    return { lists, itemIds }
-  },
+  state => ({
+    lists: getAllListsPopulated(state.lists, state.entities)
+  }),
   {
-    createListItem,
-    addList
+    addNewEntityToList,
+    createList
   }
 )(Index)

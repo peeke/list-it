@@ -1,26 +1,32 @@
-export const CREATE_LIST_ITEM = 'CREATE_LIST_ITEM'
-export const ADD_LIST_ITEM = 'ADD_LIST_ITEM'
-export const ADD_LIST = 'ADD_LIST'
+export const CREATE_LIST = 'CREATE_LIST'
+export const ADD_ENTITY_TO_LIST = 'ADD_ENTITY_TO_LIST'
+export const ADD_NEW_ENTITY_TO_LIST = 'ADD_NEW_ENTITY_TO_LIST'
 
-export function createListItem(listId, item) {
+export function addNewEntityToList(listId, entity) {
   return {
-    type: CREATE_LIST_ITEM,
-    listId,
-    item
+    type: ADD_NEW_ENTITY_TO_LIST,
+    payload: {
+      listId,
+      entity
+    }
   }
 }
 
-export function addListItem(listId, id) {
+export function addEntityToList(listId, entityId) {
   return {
-    type: ADD_LIST_ITEM,
-    listId,
-    id
+    type: ADD_ENTITY_TO_LIST,
+    payload: {
+      listId,
+      entityId
+    }
   }
 }
 
-export function addList(title) {
+export function createList(title) {
   return {
-    type: ADD_LIST,
-    title
+    type: CREATE_LIST,
+    payload: {
+      title
+    }
   }
 }

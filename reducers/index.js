@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
 import listReducer from './listReducer'
-import itemReducer from './itemReducer'
+import entityReducer from './entityReducer'
 
 export default combineReducers({
   lists: listReducer,
-  items: itemReducer
+  entities: entityReducer
 })

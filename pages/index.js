@@ -1,5 +1,6 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import Link from 'next/link'
 
 import { addNewEntityToList, createList } from 'actions/listActions'
 import { getAllListsPopulated } from 'selectors/listSelectors'
@@ -29,11 +30,17 @@ class Index extends PureComponent {
   }
 
   render() {
-    const { lists } = this.props
+    const { lists, loggedIn } = this.props
 
     return (
       <DefaultTemplate>
         <h1>List it!</h1>
+        <p>Logged in: {String(loggedIn)}</p>
+        {loggedIn ? (
+          <Link href="/logout">Logout</Link>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
         {lists.map(list => (
           <div key={list.id}>
             <h2>{list.title}</h2>
@@ -60,7 +67,8 @@ class Index extends PureComponent {
 
 export default connect(
   state => ({
-    lists: getAllListsPopulated(state.lists, state.entities)
+    lists: getAllListsPopulated(state.lists, state.entities),
+    loggedIn: state.auth.loggedIn
   }),
   {
     addNewEntityToList,

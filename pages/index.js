@@ -36,16 +36,6 @@ class Index extends PureComponent {
     return (
       <DefaultTemplate>
         <h1>List it!</h1>
-        <p>Logged in: {String(loggedIn)}</p>
-        {loggedIn ? (
-          <Link href="/logout">
-            <a>Logout</a>
-          </Link>
-        ) : (
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        )}
         {lists.map(list => (
           <div key={list.id}>
             <h2>{list.title}</h2>

@@ -48,6 +48,9 @@ export default {
   },
 
   logout() {
+    auth0WebAuth.logout({
+      returnTo: process.env.DOMAIN + '/'
+    })
     localStorage.removeItem('loggedIn')
   },
 

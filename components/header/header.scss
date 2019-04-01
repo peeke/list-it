@@ -1,0 +1,22 @@
+.header {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-gap: 1rem;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  &__navigation {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+  }
+
+  &__user-actions {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+    margin-left: auto;
+  }
+}

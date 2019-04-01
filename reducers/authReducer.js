@@ -1,17 +1,10 @@
-import uuid from 'uuid/v4'
-
-import {
-  LOGIN,
-  LOGIN_CALLBACK,
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  LOGOUT
-} from 'actions/authActions'
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from 'actions/authActions'
 
 const defaultState = {
-  profile: {},
   accessToken: null,
+  idToken: null,
   expiresAt: null,
+  user: {},
   loggedIn: false
 }
 
@@ -31,9 +24,10 @@ export default function listReducer(
     case LOGOUT:
       return {
         ...state,
-        profile: {},
         accessToken: null,
+        idToken: null,
         expiresAt: null,
+        user: {},
         loggedIn: false
       }
 

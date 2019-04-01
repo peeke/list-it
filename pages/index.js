@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 
 import { addNewEntityToList, createList } from 'actions/listActions'
+import { reauthorize } from 'actions/authActions'
 import { getAllListsPopulated } from 'selectors/listSelectors'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
@@ -37,9 +38,13 @@ class Index extends PureComponent {
         <h1>List it!</h1>
         <p>Logged in: {String(loggedIn)}</p>
         {loggedIn ? (
-          <Link href="/logout">Logout</Link>
+          <Link href="/logout">
+            <a>Logout</a>
+          </Link>
         ) : (
-          <Link href="/login">Login</Link>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
         )}
         {lists.map(list => (
           <div key={list.id}>
@@ -63,6 +68,12 @@ class Index extends PureComponent {
       </DefaultTemplate>
     )
   }
+
+  componentDidMount() {
+    if (!this.props.loggedIn) {
+      this.props.reauthorize()
+    }
+  }
 }
 
 export default connect(
@@ -72,6 +83,7 @@ export default connect(
   }),
   {
     addNewEntityToList,
-    createList
+    createList,
+    reauthorize
   }
 )(Index)

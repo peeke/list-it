@@ -1,33 +1,51 @@
+export const AUTHORIZE = 'AUTHORIZE'
+export const REAUTHORIZE = 'REAUTHORIZE'
+export const AUTHORIZE_CALLBACK = 'AUTHORIZE_CALLBACK'
 export const LOGIN = 'LOGIN'
-export const LOGIN_CALLBACK = 'LOGIN_CALLBACK'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const LOGOUT = 'LOGOUT'
 
-export function login() {
+export function authorize(redirect) {
   return {
-    type: LOGIN,
+    type: AUTHORIZE,
+    payload: { redirect }
+  }
+}
+
+export function reauthorize() {
+  return {
+    type: REAUTHORIZE,
     payload: {}
   }
 }
 
-export function loginCallback(hash, redirect) {
+export function authorizeCallback(hash) {
   return {
-    type: LOGIN_CALLBACK,
+    type: AUTHORIZE_CALLBACK,
     payload: {
-      hash,
-      redirect
+      hash
     }
   }
 }
 
-export function loginSuccess(accessToken, expiresAt, profile) {
+export function login(authResult) {
+  return {
+    type: LOGIN,
+    payload: {
+      authResult
+    }
+  }
+}
+
+export function loginSuccess(accessToken, idToken, expiresAt, user) {
   return {
     type: LOGIN_SUCCESS,
     payload: {
       accessToken,
+      idToken,
       expiresAt,
-      profile
+      user
     }
   }
 }

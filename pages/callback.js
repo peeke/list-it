@@ -1,14 +1,14 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { loginCallback } from 'actions/authActions'
+import { authorizeCallback } from 'actions/authActions'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
 
 class Callback extends PureComponent {
   componentDidMount() {
     if (/access_token|id_token|error/.test(window.location.hash)) {
-      this.props.loginCallback(window.location.hash, '/')
+      this.props.authorizeCallback(window.location.hash)
     }
   }
 
@@ -23,5 +23,5 @@ class Callback extends PureComponent {
 
 export default connect(
   null,
-  { loginCallback }
+  { authorizeCallback }
 )(Callback)

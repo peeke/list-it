@@ -11,6 +11,10 @@ function DefaultTemplate({ children, loggedIn }) {
     <div className={css.template}>
       <Head>
         <title>List.it!</title>
+        <link
+          href="https://fonts.googleapis.com/css?family=Vollkorn:900|Mukta:400,600"
+          rel="stylesheet"
+        />
       </Head>
       {loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
       {children}

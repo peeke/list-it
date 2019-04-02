@@ -1,19 +1,21 @@
-// Spacing
-$spacing-xxs: 5px;
-$spacing-xs: 10px;
-$spacing-s: 15px;
-$spacing-m: 25px;
-$spacing-l: 40px;
+// Colors
+$color-grey-purple: #3b246b;
+$color-fake-pink: #e82b65;
+$color-faded-yellow: #ffe289;
+$color-silver: #eee;
+$color-grey: #ccc;
+$color-coal: #222;
 
-// Sizes
-$minimal-tap-size: 40px;
-$header-height: 50px;
-$header-height-desktop: 70px;
-$main-width: 600px;
-$tooltip-width: 500px;
-$progress-bar-fill-height: 4px;
-$progress-bar-height-desktop: 50px;
-$card-radius: 4px;
+// Fonts
+$font-heading: 'Vollkorn', serif;
+$font-body: 'Mukta', sans-serif;
+
+// Spacing
+$spacing-xxs: 0.33rem;
+$spacing-xs: 0.5rem;
+$spacing-s: 1rem;
+$spacing-m: 1.5rem;
+$spacing-l: 2rem;
 
 // Eases
 $ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);

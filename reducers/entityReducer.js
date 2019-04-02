@@ -1,8 +1,13 @@
 import { CREATE_ENTITY } from 'actions/entityActions'
 
 const defaultState = {
-  byId: {},
-  allIds: []
+  byId: {
+    0: {
+      id: 0,
+      text: 'Your first list'
+    }
+  },
+  allIds: [0]
 }
 
 export default function entityReducer(

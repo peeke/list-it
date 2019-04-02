@@ -6,8 +6,8 @@ const defaultState = {
   byId: {
     0: {
       id: 0,
-      title: 'Your first list',
-      entities: []
+      title: 'Your lists',
+      entities: [0]
     }
   },
   allIds: [0]

@@ -26,7 +26,11 @@ class Entity extends PureComponent {
     const { id } = this.props
     return (
       <div id={id} key={id} className={css.entity} onKeyDown={this.onKeyDown}>
-        <p ref={this.editable} contentEditable={true} />
+        <p
+          ref={this.editable}
+          contentEditable={true}
+          data-placeholder="Add another list"
+        />
       </div>
     )
   }

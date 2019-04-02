@@ -35,11 +35,9 @@ class Index extends PureComponent {
 
     return (
       <DefaultTemplate>
-        <h1>List it!</h1>
         {lists.map(list => (
           <div key={list.id}>
-            <h2>{list.title}</h2>
-            <List id={list.id} key={list.id}>
+            <List {...list} key={list.id}>
               {list.entities.map(entity => (
                 <Entity key={entity.id} text={entity.value} />
               ))}
@@ -54,7 +52,7 @@ class Index extends PureComponent {
           value={this.state.newListName}
           onChange={this.onNewListNameChange}
         />
-        <Button onClick={this.addList}>Add list +</Button>
+        <Button onClick={this.addList}>Add another list +</Button>
       </DefaultTemplate>
     )
   }

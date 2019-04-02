@@ -1,9 +1,12 @@
+@import 'static/scss/constants';
+
 .button {
   appearance: none;
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: $spacing-xs $spacing-l;
   border: 0;
-  background-color: bisque;
-  border-radius: 2px;
+  border-radius: 4px;
+  background-color: $color-silver;
   font: inherit;
+  color: $color-grey-purple;
 }

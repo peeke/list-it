@@ -1,2 +1,22 @@
+@import 'static/scss/constants';
+
 .entity {
+  [contenteditable] {
+    &:before {
+      position: absolute;
+      color: transparent;
+      content: attr(data-placeholder);
+      transition: color $pace-fast;
+    }
+
+    &:empty:before {
+      color: $color-fake-pink;
+      cursor: pointer;
+    }
+
+    &:empty:focus:before {
+      color: $color-silver;
+      cursor: text;
+    }
+  }
 }

@@ -1,0 +1,25 @@
+@import 'static/scss/constants.scss';
+
+.entity-list {
+  &__filters {
+    margin: $spacing-xs 0;
+    padding: $spacing-s;
+    background-color: $color-silver;
+    border-radius: 4px;
+
+    &[aria-hidden='true'] {
+      display: none;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-s;
+
+    h1,
+    h2 {
+      margin-right: $spacing-m;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 .button {
   appearance: none;
+  min-height: 1.25rem + $spacing-xs * 2;
   margin: 0;
   padding: $spacing-xs $spacing-l;
   border: 0;
@@ -9,4 +10,20 @@
   background-color: $color-silver;
   font: inherit;
   color: $color-grey-purple;
+  transition: background-color $pace-normal;
+
+  &:hover {
+    background-color: darken($color-silver, 10%);
+  }
+
+  &--icon {
+    display: inline-flex;
+    align-items: center;
+    padding: $spacing-xs $spacing-xs;
+    background-color: transparent;
+
+    &:hover {
+      background-color: darken($color-silver, 10%);
+    }
+  }
 }

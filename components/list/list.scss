@@ -1,33 +1,19 @@
 @import 'static/scss/constants.scss';
 
 .list {
-  ul {
-    list-style: none;
-    margin: $spacing-s 0 $spacing-l;
-    padding: 0 $spacing-s;
-    border: 1px solid $color-silver;
-    box-shadow: 0 2px 4px $color-silver;
-    border-radius: 4px;
-  }
+  list-style: none;
+  margin: $spacing-s 0 $spacing-l;
+  padding: 0 $spacing-s;
+  border: 1px solid $color-silver;
+  box-shadow: 0 2px 4px $color-silver;
+  border-radius: 4px;
 
-  li {
+  > li {
     padding: $spacing-xxs 0;
     border-top: 1px solid $color-silver;
   }
 
-  li:first-child {
+  > li:first-child {
     border-top: 0;
-  }
-
-  &__header {
-    display: flex;
-    margin-bottom: $spacing-s;
-
-    h1,
-    h2 {
-      flex: 1 1 auto;
-      align-items: center;
-      margin: 0;
-    }
   }
 }

@@ -14,9 +14,13 @@ export default function listReducer(
 ) {
   switch (type) {
     case LOGIN_SUCCESS:
+      const { accessToken, idToken, expiresAt, user } = payload
       return {
         ...state,
-        ...payload,
+        accessToken,
+        idToken,
+        expiresAt,
+        user,
         loggedIn: true
       }
 

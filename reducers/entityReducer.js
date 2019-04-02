@@ -4,10 +4,19 @@ const defaultState = {
   byId: {
     0: {
       id: 0,
-      text: 'Your first list'
+      parentId: null,
+      text: 'Hello!',
+      entities: [1]
+    },
+    1: {
+      id: 1,
+      parentId: 0,
+      text: 'This is your first list',
+      entities: []
     }
   },
-  allIds: [0]
+  allIds: [0, 1],
+  rootEntity: 0
 }
 
 export default function entityReducer(
@@ -16,13 +25,19 @@ export default function entityReducer(
 ) {
   switch (type) {
     case CREATE_ENTITY:
+      const { id, parentId } = payload
+
       const entity = {
         ...payload.entity,
-        id: payload.id
+        id,
+        parentId
       }
 
-      const byId = { ...state.byId, [entity.id]: entity }
-      const allIds = [...state.allIds, entity.id]
+      const parentEntity = { ...state.byId[parentId] }
+      parentEntity.entities = [...parentEntity.entities, id]
+
+      const byId = { ...state.byId, [id]: entity, [parentId]: parentEntity }
+      const allIds = [...state.allIds, id]
       return { ...state, byId, allIds }
 
     default:

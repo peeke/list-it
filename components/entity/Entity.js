@@ -7,6 +7,7 @@ class Entity extends PureComponent {
 
   static defaultProps = {
     text: '',
+    editing: false,
     onSave: () => {}
   }
 
@@ -23,20 +24,21 @@ class Entity extends PureComponent {
   }
 
   render() {
-    const { id } = this.props
+    const { id, editing } = this.props
     return (
-      <div id={id} key={id} className={css.entity} onKeyDown={this.onKeyDown}>
-        <p
-          ref={this.editable}
-          contentEditable={true}
-          data-placeholder="Add another list"
-        />
+      <div id={id} className={css.entity}>
+        {editing ? (
+          <p
+            ref={this.editable}
+            onKeyDown={this.onKeyDown}
+            contentEditable="true"
+            data-placeholder="Add another one"
+          />
+        ) : (
+          <p>{this.props.text}</p>
+        )}
       </div>
     )
-  }
-
-  componentDidMount() {
-    this.editable.current.innerHTML = this.props.text
   }
 }
 

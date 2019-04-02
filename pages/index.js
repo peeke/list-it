@@ -1,58 +1,18 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import Link from 'next/link'
 
-import { addNewEntityToList, createList } from 'actions/listActions'
 import { reauthorize } from 'actions/authActions'
-import { getAllListsPopulated } from 'selectors/listSelectors'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
-import List from 'components/list/List'
-import Entity from 'components/entity/Entity'
-import Button from 'components/button/Button'
+import EntityList from 'components/entity-list/EntityList'
 
 class Index extends PureComponent {
-  state = {
-    newListName: '',
-    entities: []
-  }
-
-  addEntity = (entity, listId) => {
-    this.props.addNewEntityToList(listId, entity)
-  }
-
-  addList = () => {
-    this.props.createList(this.state.newListName)
-    this.setState({ newListName: '' })
-  }
-
-  onNewListNameChange = e => {
-    this.setState({ newListName: e.target.value })
-  }
-
   render() {
-    const { lists, loggedIn } = this.props
+    const { entityId } = this.props
 
     return (
       <DefaultTemplate>
-        {lists.map(list => (
-          <div key={list.id}>
-            <List {...list} key={list.id}>
-              {list.entities.map(entity => (
-                <Entity key={entity.id} text={entity.value} />
-              ))}
-              <Entity
-                key="new"
-                onSave={value => this.addEntity({ value }, list.id)}
-              />
-            </List>
-          </div>
-        ))}
-        <input
-          value={this.state.newListName}
-          onChange={this.onNewListNameChange}
-        />
-        <Button onClick={this.addList}>Add another list +</Button>
+        <EntityList entityId={entityId} />
       </DefaultTemplate>
     )
   }
@@ -66,12 +26,10 @@ class Index extends PureComponent {
 
 export default connect(
   state => ({
-    lists: getAllListsPopulated(state.lists, state.entities),
+    entityId: state.entities.rootEntity,
     loggedIn: state.auth.loggedIn
   }),
   {
-    addNewEntityToList,
-    createList,
     reauthorize
   }
 )(Index)

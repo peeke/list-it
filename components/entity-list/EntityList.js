@@ -40,7 +40,6 @@ class EntityList extends PureComponent {
     return (
       <div className={css['entity-list']}>
         {this.renderHeader()}
-
         <EntityFeatures expanded={this.state.showFilterPanel} />
 
         <List {...list} key={list.id}>
@@ -59,17 +58,11 @@ class EntityList extends PureComponent {
 
     return (
       <header className={css['entity-list__header']}>
-        {!rootEntity && (
-          <Button type="icon" onClick={this.toggle}>
-            <Icon icon="caret-down" />
-          </Button>
-        )}
+        {!rootEntity && <Button onClick={this.toggle} icon="caret-down" />}
+
         <H>{list.text}</H>
-        {loggedIn && (
-          <Button type="icon" onClick={this.toggleFilterPanel}>
-            <Icon icon="filters" />
-          </Button>
-        )}
+
+        {loggedIn && <Button onClick={this.toggleFilterPanel} icon="filters" />}
       </header>
     )
   }

@@ -53,20 +53,15 @@ class Entity extends PureComponent {
           />
         ) : (
           <>
-            {showCaret && (
-              <Button type="icon" onClick={this.toggle}>
-                <Icon icon="caret-right" />
-              </Button>
-            )}
+            {showCaret && <Button onClick={this.toggle} icon="caret-right" />}
+
             <span>{text}</span>
+
             {Boolean(entities.length) && (
               <NumberBadge count={entities.length} />
             )}
-            {loggedIn && (
-              <Button type="icon" onClick={this.delete}>
-                <Icon icon="trash" />
-              </Button>
-            )}
+
+            {loggedIn && <Button onClick={this.delete} icon="trash" />}
           </>
         )}
       </div>

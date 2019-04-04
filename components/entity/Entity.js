@@ -7,6 +7,7 @@ import css from './entity.scss'
 
 import Icon from 'components/icon/Icon'
 import Button from 'components/button/Button'
+import NumberBadge from 'components/number-badge/NumberBadge'
 
 class Entity extends PureComponent {
   editable = React.createRef()
@@ -42,7 +43,7 @@ class Entity extends PureComponent {
     const { id, editing, text, entities, loggedIn } = this.props
     const showCaret = Boolean(loggedIn && entities.length)
     return (
-      <div id={id} className={css.entity}>
+      <div id={id} className={css['entity']}>
         {editing ? (
           <span
             ref={this.editable}
@@ -58,7 +59,9 @@ class Entity extends PureComponent {
               </Button>
             )}
             <span>{text}</span>
-            {this.renderEntityCount()}
+            {Boolean(entities.length) && (
+              <NumberBadge count={entities.length} />
+            )}
             {loggedIn && (
               <Button type="icon" onClick={this.delete}>
                 <Icon icon="trash" />
@@ -67,13 +70,6 @@ class Entity extends PureComponent {
           </>
         )}
       </div>
-    )
-  }
-
-  renderEntityCount() {
-    if (!this.props.entities.length) return null
-    return (
-      <div className={css['entity__counter']}>{this.props.entities.length}</div>
     )
   }
 }

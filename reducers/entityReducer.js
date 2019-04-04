@@ -56,7 +56,8 @@ export default function entityReducer(
       const { id, parentId } = payload
 
       const entity = {
-        ...payload.entity,
+        text: payload.entity.text,
+        entities: [],
         id,
         parentId
       }

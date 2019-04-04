@@ -8,16 +8,6 @@ import Header from 'components/header/Header'
 import Button from 'components/button/Button'
 
 class HeaderLoggedOut extends PureComponent {
-  renderNavigation = () => (
-    <nav>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-    </nav>
-  )
-
-  renderUserActions = () => <Button onClick={this.onLogin}>Login</Button>
-
   onLogin = e => {
     e.preventDefault()
     this.props.authorize('/')
@@ -25,10 +15,17 @@ class HeaderLoggedOut extends PureComponent {
 
   render() {
     return (
-      <Header
-        navigation={this.renderNavigation()}
-        userActions={this.renderUserActions()}
-      />
+      <Header>
+        <Header.Navigation>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        </Header.Navigation>
+
+        <Header.UserActions>
+          <Button onClick={this.onLogin}>Login</Button>
+        </Header.UserActions>
+      </Header>
     )
   }
 }

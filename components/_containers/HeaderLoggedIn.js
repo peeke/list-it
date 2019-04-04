@@ -9,21 +9,6 @@ import Button from 'components/button/Button'
 import ProfileBadge from 'components/profile-badge/ProfileBadge'
 
 class HeaderLoggedIn extends PureComponent {
-  renderNavigation = () => (
-    <nav>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-    </nav>
-  )
-
-  renderUserActions = () => (
-    <>
-      <ProfileBadge {...this.props.user} />
-      <Button onClick={this.onLogout}>Logout</Button>
-    </>
-  )
-
   onLogout = e => {
     e.preventDefault()
     this.props.logout()
@@ -31,10 +16,18 @@ class HeaderLoggedIn extends PureComponent {
 
   render() {
     return (
-      <Header
-        navigation={this.renderNavigation()}
-        userActions={this.renderUserActions()}
-      />
+      <Header>
+        <Header.Navigation>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        </Header.Navigation>
+
+        <Header.UserActions>
+          <ProfileBadge {...this.props.user} />
+          <Button onClick={this.onLogout}>Logout</Button>
+        </Header.UserActions>
+      </Header>
     )
   }
 }

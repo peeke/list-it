@@ -3,33 +3,29 @@ import React, { PureComponent } from 'react'
 import css from './header.scss'
 
 class Header extends PureComponent {
+  static Navigation = HeaderNavigation
+  static UserActions = HeaderUserActions
+
   render() {
     return (
-      <header className={css.header}>
+      <header className={css['header']}>
         <div className={css['header__logo']}>
           List it! {/* TODO: add svg */}
         </div>
-        {this.renderNavigation()}
-        {this.renderUserActions()}
+        {this.props.children}
       </header>
     )
   }
+}
 
-  renderNavigation() {
-    if (!this.props.navigation) return null
-    return (
-      <div className={css['header__navigation']}>{this.props.navigation}</div>
-    )
-  }
+function HeaderNavigation({ children }) {
+  if (!children) return null
+  return <nav className={css['header__navigation']}>{children}</nav>
+}
 
-  renderUserActions() {
-    if (!this.props.userActions) return null
-    return (
-      <div className={css['header__user-actions']}>
-        {this.props.userActions}
-      </div>
-    )
-  }
+function HeaderUserActions({ children }) {
+  if (!children) return null
+  return <nav className={css['header__user-actions']}>{children}</nav>
 }
 
 export default Header

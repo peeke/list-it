@@ -1,0 +1,16 @@
+@import 'static/scss/constants';
+
+.entity-features {
+  margin: $spacing-xs 0;
+  padding: $spacing-s;
+  background-color: $color-silver;
+  border-radius: 4px;
+
+  &[aria-hidden='true'] {
+    display: none;
+  }
+
+  > * + * {
+    margin-left: $spacing-m;
+  }
+}

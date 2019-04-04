@@ -1,7 +1,10 @@
+@import 'static/scss/constants';
+
 .icon {
   display: inline-block;
   display: inline-flex;
   height: 1em;
   width: auto;
   opacity: 0.5;
+  transition: transform $pace-fast $ease-in-out;
 }

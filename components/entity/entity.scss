@@ -1,6 +1,14 @@
 @import 'static/scss/constants';
 
 .entity {
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs 0;
+
+  > * + * {
+    margin-left: $spacing-s;
+  }
+
   [contenteditable] {
     &:before {
       position: absolute;
@@ -18,5 +26,15 @@
       color: $color-silver;
       cursor: text;
     }
+  }
+
+  &__counter {
+    background-color: $color-silver;
+    padding: $spacing-xxs;
+    font-size: 0.8rem;
+    line-height: 1;
+    width: 0.8rem + $spacing-xxs * 2;
+    text-align: center;
+    border-radius: 0.4rem + $spacing-xxs;
   }
 }

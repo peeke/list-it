@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { reauthorize } from 'actions/authActions'
 
 import DefaultTemplate from 'components/templates/DefaultTemplate'
-import EntityList from 'components/entity-list/EntityList'
+import EntityList from 'components/_containers/entity-list/EntityList'
 
 class Index extends PureComponent {
   render() {

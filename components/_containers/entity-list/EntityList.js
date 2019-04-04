@@ -4,16 +4,18 @@ import { connect } from 'react-redux'
 import css from './entity-list.scss'
 
 import { getEntityById, populateEntity } from 'selectors/entitySelectors'
-import { createEntity } from 'actions/entityActions'
+import { createEntity, toggleEntity } from 'actions/entityActions'
 
 import Icon from 'components/icon/Icon'
 import Button from 'components/button/Button'
 import List from 'components/list/List'
 import Entity from 'components/entity/Entity'
+import EntityFeatures from 'components/entity-features/EntityFeatures'
 
 class EntityList extends PureComponent {
   static defaultProps = {
-    entityId: null
+    entityId: null,
+    level: 1
   }
 
   state = {
@@ -28,6 +30,10 @@ class EntityList extends PureComponent {
     this.setState({ showFilterPanel: !this.state.showFilterPanel })
   }
 
+  toggle = () => {
+    this.props.toggleEntity(this.props.entityId)
+  }
+
   render() {
     const { list, loggedIn } = this.props
 
@@ -35,12 +41,7 @@ class EntityList extends PureComponent {
       <div className={css['entity-list']}>
         {this.renderHeader()}
 
-        <div
-          className={css['entity-list__filters']}
-          aria-hidden={!this.state.showFilterPanel}
-        >
-          Filter panel
-        </div>
+        <EntityFeatures expanded={this.state.showFilterPanel} />
 
         <List {...list} key={list.id}>
           {list.entities.map(this.renderEntity)}
@@ -54,10 +55,14 @@ class EntityList extends PureComponent {
 
   renderHeader() {
     const { list, loggedIn } = this.props
+    const H = `h${this.props.level}`
 
     return (
       <header className={css['entity-list__header']}>
-        <h2>{list.text}</h2>
+        <Button type="icon" onClick={this.toggle}>
+          <Icon icon="caret-down" />
+        </Button>
+        <H>{list.text}</H>
         {loggedIn && (
           <Button type="icon" onClick={this.toggleFilterPanel}>
             <Icon icon="filters" />
@@ -67,10 +72,20 @@ class EntityList extends PureComponent {
     )
   }
 
-  renderEntity = ({ id, ...props }) => <Entity key={id} id={id} {...props} />
+  renderEntity = ({ id, ...props }) => {
+    return props.expanded ? (
+      <ConnectedEntityList
+        key={id}
+        entityId={id}
+        level={this.props.level + 1}
+      />
+    ) : (
+      <Entity key={id} id={id} {...props} />
+    )
+  }
 }
 
-export default connect(
+const ConnectedEntityList = connect(
   (state, ownProps) => {
     const entity = getEntityById(state.entities, ownProps.entityId)
     const populatedEntity = populateEntity(entity, state.entities)
@@ -79,5 +94,7 @@ export default connect(
       loggedIn: state.auth.loggedIn
     }
   },
-  { createEntity }
+  { createEntity, toggleEntity }
 )(EntityList)
+
+export default ConnectedEntityList

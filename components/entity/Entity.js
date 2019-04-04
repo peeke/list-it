@@ -1,6 +1,12 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+
+import { toggleEntity, deleteEntity } from 'actions/entityActions'
 
 import css from './entity.scss'
+
+import Icon from 'components/icon/Icon'
+import Button from 'components/button/Button'
 
 class Entity extends PureComponent {
   editable = React.createRef()
@@ -8,6 +14,7 @@ class Entity extends PureComponent {
   static defaultProps = {
     text: '',
     editing: false,
+    entities: [],
     onSave: () => {}
   }
 
@@ -23,23 +30,55 @@ class Entity extends PureComponent {
     this.props.onSave(value)
   }
 
+  toggle = () => {
+    this.props.toggleEntity(this.props.id)
+  }
+
+  delete = () => {
+    this.props.deleteEntity(this.props.id)
+  }
+
   render() {
-    const { id, editing } = this.props
+    const { id, editing, text, entities, loggedIn } = this.props
+    const showCaret = Boolean(loggedIn && entities.length)
     return (
       <div id={id} className={css.entity}>
         {editing ? (
-          <p
+          <span
             ref={this.editable}
             onKeyDown={this.onKeyDown}
             contentEditable="true"
             data-placeholder="Add another one"
           />
         ) : (
-          <p>{this.props.text}</p>
+          <>
+            {showCaret && (
+              <Button type="icon" onClick={this.toggle}>
+                <Icon icon="caret-right" />
+              </Button>
+            )}
+            <span>{text}</span>
+            {this.renderEntityCount()}
+            {loggedIn && (
+              <Button type="icon" onClick={this.delete}>
+                <Icon icon="trash" />
+              </Button>
+            )}
+          </>
         )}
       </div>
     )
   }
+
+  renderEntityCount() {
+    if (!this.props.entities.length) return null
+    return (
+      <div className={css['entity__counter']}>{this.props.entities.length}</div>
+    )
+  }
 }
 
-export default Entity
+export default connect(
+  state => ({ loggedIn: state.auth.loggedIn }),
+  { toggleEntity, deleteEntity }
+)(Entity)
